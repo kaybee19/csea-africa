@@ -1,24 +1,33 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
+
+// Material UI
+import { ThemeProvider } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
+import appTheme from './util/theme';
+import PropTypes from 'prop-types';
+import withWidth from '@material-ui/core/withWidth';
+
+// Component
+// import ScrollTop from './components/ScrollTop';
+import Navbar from './components/Navbar';
+import Body from './components/Body';
+// import Text from './components/Text';
+// import Footer from './components/Footer';
+
+const theme = createTheme(appTheme);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Navbar />
+        <Body />
+        {/*<Text />*/}
+        {/*<Footer />*/}
+      </Router>
+    </ThemeProvider>
   );
 }
 

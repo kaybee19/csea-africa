@@ -36,3 +36,33 @@
     transform: rotate(360deg);
   }
 }
+
+
+/*------------------------------------------------
+                    MY EDITS
+-------------------------------------------------*/
+
+
+/* SVG Edit */
+svg.rsm-svg {
+  min-height: 600px!important;
+}
+
+svg.rsm-svg:focus {
+  outline: none;
+}
+
+/* Menu Popover Edit */
+#menu- .MuiMenu-paper {
+  min-width: 350px;
+  top: 160px!important;
+}
+
+/* Linear progress edit */
+.editClass > .MuiLinearProgress-colorPrimary {
+    background-color: rgb(182, 188, 226)!important;
+}
+
+.editClass > div > .MuiLinearProgress-barColorPrimary {
+    background-color: #3f51b5!important;
+}
