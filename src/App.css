@@ -58,6 +58,10 @@ svg.rsm-svg:focus {
   top: 160px!important;
 }
 
+.rsm-geographies {
+  transform: scaleX(1.2);
+}
+
 /* Linear progress edit */
 .editClass > .MuiLinearProgress-colorPrimary {
     background-color: rgb(182, 188, 226)!important;
@@ -65,4 +69,25 @@ svg.rsm-svg:focus {
 
 .editClass > div > .MuiLinearProgress-barColorPrimary {
     background-color: #3f51b5!important;
+}
+
+.editClass > .MuiCircularProgress-colorPrimary {
+    color: #3f51b5!important;
+}
+
+.linerClass {
+  position: relative;
+  width: fit-content;
+}
+
+.linerClass .progressText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold!important;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top:  0;
 }

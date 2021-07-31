@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // Material UI
-import LinearProgress from '@material-ui/core/LinearProgress';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -13,22 +13,13 @@ import SvgCircle from '../SvgCircle';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	...theme.spreadThis,
-	cont: {
-		display: 'flex',
-		alignItems: 'baseline',
-		margin: '1.5rem 0 .5rem',
-	},
 	progress: {
 		maxWidth: '525px',
 		 borderRadius: '16px',
 		 height: '8px',
 	},
 	gridCont: {
-		'& .linerClass p': {
-			textAlign: 'end',
-			marginTop: '-.75rem',
-			marginRight: '3rem',
-		}
+		marginBottom: '2.5rem'
 	},
 	svg: {
 		display: 'flex',
@@ -51,14 +42,17 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 }));
 
 
-function LinearProgressWithLabel(props) {
+function CircularProgressWithLabel(props) {
 
 	const colorCode = props.value/100 < 0.4 ? 'main' : (props.value/100 < 0.7 ? 'primary' : 'secondary');
 
   return (
   	<div className={`linerClass ${colorCode === 'main' && 'editClass'}`}>
-      <LinearProgress color={colorCode === 'main' ? 'primary' : colorCode} variant="determinate" {...props} />
-      <Typography variant="body2" color="textSecondary">{(props.value/100).toFixed(3)}</Typography>
+      <CircularProgress size={125} thickness={2.75} color={colorCode === 'main' ? 'primary' : colorCode} variant="determinate" {...props} />
+      <Typography variant="body1" className="progressText" color="textSecondary">
+      	{(props.value/100).toFixed(3)}
+      	<Typography variant='caption'>/1.0</Typography>
+      </Typography>
     </div>
   );
 }
@@ -84,12 +78,12 @@ export default function AllData(props) {
     // console.log(mine);
 
     setCountry({
-    	a: Math.random()*100,
-    	b: Math.random()*100,
-    	c: Math.random()*100,
-    	d: Math.random()*100,
-    	e: Math.random()*100,
-    	f: Math.random()*100
+    	a: (Math.random()*(1-.35)+.35)*100,
+    	b: (Math.random()*(1-.35)+.35)*100,
+    	c: (Math.random()*(1-.35)+.35)*100,
+    	d: (Math.random()*(1-.35)+.35)*100,
+    	e: (Math.random()*(1-.35)+.35)*100,
+    	f: (Math.random()*(1-.35)+.35)*100
     })
 
   }, [props.country]);
@@ -104,50 +98,50 @@ export default function AllData(props) {
 						<p>Please select a country to view the index</p>
 					</div>
 					) : (
-					<span>
-						<Grid className={classes.gridCont}>
+					<Grid container>
+						<Grid item xs={12} md={4} className={classes.gridCont}>
 							<div className={classes.cont}>
 								<Typography variant="body1">DPI</Typography>
-								<Typography style={{ marginLeft: '.5rem', fontSize: '.6rem' }} variant="overline">1st</Typography>
+								<Typography style={{ fontSize: '.6rem' }} variant="overline">1st</Typography>
 							</div>
-							<LinearProgressWithLabel className={classes.progress} value={country.a} />
+							<CircularProgressWithLabel className={classes.progress} value={country.a} />
 						</Grid>
-						<Grid className={classes.gridCont}>
+						<Grid item xs={12} md={4} className={classes.gridCont}>
 							<div className={classes.cont}>
 								<Typography variant="body1">EDU</Typography>
-								<Typography style={{ marginLeft: '.5rem', fontSize: '.6rem' }} variant="overline">1st</Typography>
+								<Typography style={{ fontSize: '.6rem' }} variant="overline">1st</Typography>
 							</div>
-							<LinearProgressWithLabel className={classes.progress} value={country.b} />
+							<CircularProgressWithLabel className={classes.progress} value={country.b} />
 						</Grid>
-						<Grid className={classes.gridCont}>
+						<Grid item xs={12} md={4} className={classes.gridCont}>
 							<div className={classes.cont}>
 								<Typography variant="body1">INFRA</Typography>
-								<Typography style={{ marginLeft: '.5rem', fontSize: '.6rem' }} variant="overline">1st</Typography>
+								<Typography style={{ fontSize: '.6rem' }} variant="overline">1st</Typography>
 							</div>
-							<LinearProgressWithLabel className={classes.progress} value={country.c} />
+							<CircularProgressWithLabel className={classes.progress} value={country.c} />
 						</Grid>
-						<Grid className={classes.gridCont}>
+						<Grid item xs={12} md={4} className={classes.gridCont}>
 							<div className={classes.cont}>
 								<Typography variant="body1">BUS</Typography>
-								<Typography style={{ marginLeft: '.5rem', fontSize: '.6rem' }} variant="overline">1st</Typography>
+								<Typography style={{ fontSize: '.6rem' }} variant="overline">1st</Typography>
 							</div>
-							<LinearProgressWithLabel className={classes.progress} value={country.d} />
+							<CircularProgressWithLabel className={classes.progress} value={country.d} />
 						</Grid>
-						<Grid className={classes.gridCont}>
+						<Grid item xs={12} md={4} className={classes.gridCont}>
 							<div className={classes.cont}>
 								<Typography variant="body1">ECON</Typography>
-								<Typography style={{ marginLeft: '.5rem', fontSize: '.6rem' }} variant="overline">1st</Typography>
+								<Typography style={{ fontSize: '.6rem' }} variant="overline">1st</Typography>
 							</div>
-							<LinearProgressWithLabel className={classes.progress} value={country.e} />
+							<CircularProgressWithLabel className={classes.progress} value={country.e} />
 						</Grid>
-						<Grid className={classes.gridCont}>
+						<Grid item xs={12} md={4} className={classes.gridCont}>
 							<div className={classes.cont}>
 								<Typography variant="body1">REG</Typography>
-								<Typography style={{ marginLeft: '.5rem', fontSize: '.6rem' }} variant="overline">1st</Typography>
+								<Typography style={{ fontSize: '.6rem' }} variant="overline">1st</Typography>
 							</div>
-							<LinearProgressWithLabel className={classes.progress} value={country.f} />
+							<CircularProgressWithLabel className={classes.progress} value={country.f} />
 						</Grid>
-					</span>
+					</Grid>
 				)
 			}			
 		</div>
