@@ -24,7 +24,7 @@ const MapChart = ({ setTooltipContent }) => {
     <>
       <ComposableMap data-tip="" projectionConfig={{
           rotate: [-30, -1, 0],
-          scale: 475
+          scale: 450
         }}>
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
