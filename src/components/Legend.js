@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 	body: {
 		display: 'flex',
 		alignItems: 'center',
-		margin: '1rem',
+		marginRight: '1rem',
 	},
 	box: {
 		height: '1rem',
@@ -32,7 +32,7 @@ export default function Legend(props) {
   ]
 
 	return (
-		<div style={{ display: 'flex' }}>
+		<div style={{ display: 'flex', position: 'absolute', bottom: '-25px' }}>
 			{
 				data.map((d, i) => (
 					<span className={classes.body} key={i}>

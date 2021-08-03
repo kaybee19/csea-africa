@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 	textHeader: {
 		fontWeight: 300,
 		fontSize: '1.5rem',
-		margin: '2rem 0'
+		margin: '1.5rem 0'
 	}
 }));
 

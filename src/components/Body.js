@@ -15,6 +15,7 @@ import DataPoints from "./DataPoints";
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	...theme.spreadThis,
 	cont: {
+		position: 'relative',
 		margin: '2.5rem 0'
 	}
 }));

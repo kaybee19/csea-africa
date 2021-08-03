@@ -52,6 +52,10 @@ svg.rsm-svg:focus {
   outline: none;
 }
 
+.rsm-geographies path {
+  cursor: pointer;
+} 
+
 /* Menu Popover Edit */
 #menu- .MuiMenu-paper {
   min-width: 350px;
@@ -90,4 +94,28 @@ svg.rsm-svg:focus {
     height: 100%;
     width: 100%;
     top:  0;
+}
+
+.MuiCircularProgress-circleDeterminate {
+  transition: stroke-dashoffset 1000ms cubic-bezier(0.4, 0, 0.2, 1) 0ms!important;
+  /*stroke-linecap: round;*/
+}
+
+.MuiCircularProgress-determinate:before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  right: 0;
+  bottom: 0;
+  transform: rotate(90deg);
+  border-style: dashed;
+  border-color: #eaeaec;
+  border-radius: 50%;
+  z-index: -1;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }

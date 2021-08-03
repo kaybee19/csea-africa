@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		 height: '8px',
 	},
 	gridCont: {
-		marginBottom: '2.5rem'
+		marginBottom: '2.2rem'
 	},
 	svg: {
 		display: 'flex',
@@ -44,11 +44,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 function CircularProgressWithLabel(props) {
 
-	const colorCode = props.value/100 < 0.4 ? 'main' : (props.value/100 < 0.7 ? 'primary' : 'secondary');
+	const colorCode = props.value/100 < 0.5 ? 'main' : (props.value/100 < 0.7 ? 'primary' : 'secondary');
 
   return (
   	<div className={`linerClass ${colorCode === 'main' && 'editClass'}`}>
-      <CircularProgress size={125} thickness={2.75} color={colorCode === 'main' ? 'primary' : colorCode} variant="determinate" {...props} />
+      <CircularProgress size={150} thickness={3} color={colorCode === 'main' ? 'primary' : colorCode} variant="determinate" {...props} />
       <Typography variant="body1" className="progressText" color="textSecondary">
       	{(props.value/100).toFixed(3)}
       	<Typography variant='caption'>/1.0</Typography>
