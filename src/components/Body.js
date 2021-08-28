@@ -10,13 +10,43 @@ import { makeStyles, createStyles, useTheme } from '@material-ui/core/styles';
 
 // Comps
 import MapChart from "./MapChart";
+import MapBack from "./MapBack";
 import DataPoints from "./DataPoints";
+import { dummy } from '../util/data';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	...theme.spreadThis,
 	cont: {
 		position: 'relative',
-		margin: '2.5rem 0'
+		margin: '2.5rem 0rem',
+		padding: '0 3.25rem',
+		overflow: 'hidden',
+		[theme.breakpoints.down('sm')]: {
+			padding: '0 1rem',
+		}
+	},
+	gridCont: {
+		paddingBottom: '3rem',
+		order: 1,
+		[theme.breakpoints.up('md')]: {
+			position: 'relative',
+			paddingRight: '2.75rem',
+			order: 0,
+		},
+		[theme.breakpoints.down('sm')]: {
+			padding: '0 3.25rem',
+		},
+		[theme.breakpoints.down('xs')]: {
+			padding: '0 1rem',
+		}
+	},
+	gridBottom: {
+		position: 'relative',
+		marginTop: '3rem',
+		// overflow: 'hidden',
+		[theme.breakpoints.down('sm')]: {
+			marginTop: '7.5rem',
+		}
 	}
 }));
 
@@ -24,10 +54,22 @@ export default function Navbar(props) {
 
   const theme = useTheme();
   const classes = useStyles(props);
-  // const matches = useMediaQuery(theme.breakpoints.up('md'));
+  const matchMD = useMediaQuery(theme.breakpoints.up('md'));
+  const matchSM = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [content, setContent] = useState('');
   const [country, setCountry] = useState('')
+
+  const handleUpdate = (d) => {
+  	// setContent(d);
+
+  	const id = dummy.filter(fil => fil.country === d)[0]['id'];
+
+  	const arr = document.getElementsByClassName('rsm-geography');
+  	arr.length !== 0 && [...arr].forEach(d => d.classList.remove('map-class'));
+
+    id !== '' && arr[id-1].classList.add('map-class');
+  }
 
 	React.useEffect(() => {
   	const element = document.getElementsByClassName('rsm-geographies');
@@ -37,16 +79,16 @@ export default function Navbar(props) {
 		}
 	}, [content]);
 
-
 	return (
 		<Container className={classes.cont} maxWidth="xl">
-			<Grid container>
-				<Grid item xs={12} md={6}>
-					 <DataPoints content={country} />
+			<Grid justify='space-between' container>
+				<Grid className={classes.gridCont} item xs={12} md={6} lg={5}>
+					 <DataPoints handleUpdate={handleUpdate} content={country} />
 				</Grid>
-				<Grid item xs={12} md={6} style={{ overflow: 'hidden' }}>
+				<Grid item xs={12} md={6} lg={7} className={classes.gridBottom}>
+		      {!matchSM && <ReactTooltip>{content}</ReactTooltip>}
 		      <MapChart setTooltipContent={setContent} />
-		      <ReactTooltip>{content}</ReactTooltip>
+		      <MapBack />
 				</Grid>
 			</Grid>
 		</Container>

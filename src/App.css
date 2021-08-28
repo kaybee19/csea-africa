@@ -1,3 +1,16 @@
+/*
+
+MATERIAL UI BREAKPOINTS
+
+xs, extra-small: 0px
+sm, small: 600px
+md, medium: 960px
+lg, large: 1280px
+xl, extra-large: 1920px
+
+*/
+
+
 .App {
   text-align: center;
 }
@@ -56,27 +69,73 @@ svg.rsm-svg:focus {
   cursor: pointer;
 } 
 
-/* Menu Popover Edit */
+/* Select menu Popover Edit */
 #menu- .MuiMenu-paper {
-  min-width: 350px;
-  top: 160px!important;
+  min-width: 450px;
+/*  margin-top: 4.5rem!important;
+  transform-origin: 0px 39px!important;*/
 }
+@media only screen and (max-width: 600px) {
+  #menu- .MuiMenu-paper {
+    min-width: 325px;
+  }
+}
+
+
+/* SVG Map */
 
 .rsm-geographies {
   transform: scaleX(1.2);
 }
+@media only screen and (max-width: 1279px) {
+  .rsm-geographies {
+    transform: scaleX(1.2) translateX(-75px);
+  }
+}
+
+@media only screen and (max-width: 1080px) {
+  .rsm-geographies {
+    transform: scaleX(1.2) translateX(-135px);
+  }
+}
+
+.map-class {
+  fill: #327ab7!important;
+  stroke: white!important;
+}
+
+.__react_component_tooltip {
+  background-color: #F3F8FC!important;
+  color: #337ab7!important;
+  opacity: 1!important;
+}
+
+.place-top::after { border-top-color: #F3F8FC!important;  }
+.place-right::after { border-right-color: #F3F8FC!important;  }
+.place-left::after { border-left-color: #F3F8FC!important;  }
+.place-bottom::after { border-bottom-color: #F3F8FC!important;  }
+
+.rsm-svg:last-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+
 
 /* Linear progress edit */
+
 .editClass > .MuiLinearProgress-colorPrimary {
-    background-color: rgb(182, 188, 226)!important;
+  background-color: rgb(182, 188, 226)!important;
 }
 
-.editClass > div > .MuiLinearProgress-barColorPrimary {
-    background-color: #3f51b5!important;
+.editClass > div > .MuiCircularProgress-root {
+  background-color: #FFF9F0!important;
 }
 
-.editClass > .MuiCircularProgress-colorPrimary {
-    color: #3f51b5!important;
+.editClass > .MuiCircularProgress-root {
+  color: #FF9800!important;
 }
 
 .linerClass {
@@ -85,15 +144,15 @@ svg.rsm-svg:focus {
 }
 
 .linerClass .progressText {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold!important;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top:  0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold!important;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top:  0;
 }
 
 .MuiCircularProgress-circleDeterminate {
@@ -111,11 +170,77 @@ svg.rsm-svg:focus {
   right: 0;
   bottom: 0;
   transform: rotate(90deg);
-  border-style: dashed;
-  border-color: #eaeaec;
+  border-style: solid;
+  border-color: inherit;
   border-radius: 50%;
   z-index: -1;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+}
+
+.single > .MuiCircularProgress-root:before {
+  border-width: 17.5px;
+}
+.two > .MuiCircularProgress-root:before {
+  border-width: 11px;
+}
+.more > .MuiCircularProgress-root:before {
+  border-width: 9px;
+}
+
+.textHeader {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  margin: 3.5rem 0 0;
+}
+
+.pointerClass {
+  pointer-events: none!important;
+}
+
+
+/* Select edit */
+
+.MuiSelect-select:focus, .MuiSelect-select:hover {
+  background: #E0E6EB;
+  transition: .5s;
+}
+
+.MuiInput-underline:after {
+  border-color: #337ab7!important;
+}
+.MuiInput-underline:before {
+  border-color: #627C93!important;
+}
+
+.MuiInputBase-root .MuiSelect-icon {
+  color: #337ab7!important;
+}
+
+.MuiSelect-select.MuiSelect-select {
+  padding: 1rem;
+  color: #627C93!important;
+  font-size: 1rem!important;
+}
+
+.MuiListItem-root.MuiMenuItem-root {
+  margin: .25rem .5rem!important;
+  border-radius: 124px;
+}
+
+.MuiListItem-root.MuiMenuItem-root:hover, .MuiListItem-root.Mui-selected, .MuiListItem-root.Mui-selected:hover {
+  background-color: #F3F8FC!important;
+}
+
+.Mui-checked {
+  color: #337ab7!important;
+}
+
+.Mui-checked > span > svg {
+  border: 2px #337ab7 solid!important;
+  border-radius: 3px!important;
+  font-size: 1.25rem!important;
 }

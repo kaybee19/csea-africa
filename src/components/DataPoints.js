@@ -7,26 +7,59 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Input from '@material-ui/core/Input';
+import ListItemText from '@material-ui/core/ListItemText';
+import Checkbox from '@material-ui/core/Checkbox';
+import StopIcon from '@material-ui/icons/Stop';
+import InfoIcon from '@material-ui/icons/Info';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { makeStyles, createStyles, useTheme } from '@material-ui/core/styles';
 
 // Comps
 import AllData from './Data/AllData';
 import Legend from './Legend';
+import { text, dummy } from '../util/data'
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	...theme.spreadThis,
 	formControl: {
-		minWidth: '350px'
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    width: '100%',
+    [theme.breakpoints.down('sm')]: {
+      left: '0',
+      right: '0',
+      position: 'absolute',
+      top: '0',
+      width: 'auto',
+      padding: '0 3.25rem',
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: '0 1rem',
+    },
 	},
 	selectClass: {
+    minWidth: '450px',
 		fontSize: '1.25rem',
-		fontWeight: '300'
+		fontWeight: '300',
+    [theme.breakpoints.down('sm')]: {
+     maxWidth: '47.5%',
+     minWidth: '47.5%',
+     '&:last-child': {
+      display: 'block!important',
+      '& > .MuiInput-input': {
+        width: 'auto'
+      }
+     }
+    },
 	},
 	textHeader: {
-		fontWeight: 300,
-		fontSize: '1.5rem',
-		margin: '1.5rem 0'
+		fontWeight: 500,
+    display: 'flex',
+    alignItems: 'center',
+		fontSize: '1.1rem',
+		margin: '3.5rem 0 0'
 	}
 }));
 
@@ -36,64 +69,125 @@ export default function Navbar(props) {
   const classes = useStyles(props);
   // const matches = useMediaQuery(theme.breakpoints.up('md'));
 
-  const [number, setNumber] = useState('');
-  const [country, setCountry] = useState('')
+  const points = [
+    'DPI', 'EDU', 'INFRA', 'BUS', 'ECON', 'REG'
+  ]
 
-  const handleChange = (event) => {
-    setNumber(event.target.value);
+  const [country, setCountry] = useState('')
+  const [data, setData] = useState([]);
+
+  const handleCheck = (event) => {
+    setData(event.target.value);
   };
 
-  const textMarkup = number === '' ? 'Index Points' : (
-  	number === 1 ? 'D.P.I' : (
-  		number === 2 ? 'E.D.U' : (
-  			number === 3 ? 'I.N.F.R.A' : (
-  				number === 4 ? 'B.U.S' : (
-  					number === 5 ? 'E.C.O.N' : (
-  						number === 6 ? 'R.E.G' : null
-  						)
-  					)
-  				)
-  			)
-  		)
-  	);
+  const handleSelect = (event) => {
+    setCountry(event.target.value);
+    props.handleUpdate(event.target.value)
+  };
+
+  const handleScroll = () => {
+
+    let formPos = document.querySelector('#formControl').getBoundingClientRect();
+    let css = window.document.styleSheets[0];
+    css.insertRule(`#menu- .MuiMenu-paper { top: ${formPos['y']+60}px!important; }`, css.cssRules.length);
+
+  }
+
+  const textMarkup = `Select ${data.length === 0 ? 'an index point and' : ''} a country to display data`;
 
 	React.useEffect(() => {
 		setCountry(props.content);
-    return () => {
-      console.log("Unmount")
-    }
-	}, [props.content]);
 
+    if (props.content !== '' && data.length === 0) {
+      setData(['DPI'])
+    }
+
+	}, [props.content]);
 
 	return (
 		<div>
-      <FormControl className={classes.formControl}>
+      <div onMouseOver={handleScroll} className={classes.formControl} id="formControl">
         <Select
         	className={classes.selectClass}
         	autoWidth={true}
-          labelId="data-point-select"
-          id="dp-select"
-          value={number}
-          onChange={handleChange}
-          inputProps={{ 'aria-label': 'Without label' }}
+          labelId="mutiple-checkbox-label"
+          id="mutiple-checkbox"
+          multiple
+          value={data}
+          onChange={handleCheck}
+          input={<Input />}
           displayEmpty
+          renderValue={(selected) => {
+            if (selected.length === 0) {
+              return '-- Select --'
+            }
+            else {
+              return selected.join(', ')
+            }
+          }}
         >
-        	<MenuItem value=''>Show All</MenuItem>
-          <MenuItem value={1}>DPI</MenuItem>
-          <MenuItem value={2}>EDU</MenuItem>
-          <MenuItem value={3}>INFRA</MenuItem>	
-          <MenuItem value={4}>BUS</MenuItem>
-          <MenuItem value={5}>ECON</MenuItem>
-          <MenuItem value={6}>REG</MenuItem>
+          {points.map((d) => (
+            <MenuItem key={d} value={d}>
+              <Checkbox checkedIcon={<StopIcon />} checked={data.indexOf(d) > -1} />
+              <ListItemText primary={d} />
+            </MenuItem>
+          ))}
         </Select>
-      </FormControl>
+        <Select
+          className={classes.selectClass}
+          style={{display: 'none'}}
+          autoWidth={true}
+          labelId="select-country"
+          id="select-country"
+          value={country}
+          onChange={handleSelect}
+          displayEmpty
+          renderValue={() => (country === '') ? '-- Select Country --' : country }
+        >
+          {
+            dummy.map((d, i) => (
+            <MenuItem key={i} value={d.country}>{d.country}</MenuItem>
+          ))
+          }
+        </Select>
+      </div>
       <Grid>
-      	<Typography className={classes.textHeader} variant='body1'>{country !== null ? country : props.content} {textMarkup} {number !== '' && 'Index'}</Typography>
+        {
+          data.length === 1 &&
+          text.filter(fil => fil.name === data[0]).map(m => (
+            <div className={classes.filter}>
+              <Typography style={{fontWeight: 'bold', margin: '2.5rem auto 1rem'}} variant='h5'>{m.name}</Typography>
+              <Typography style={{lineHeight: '1.45rem', color: '#627C93'}} variant='body2'>{m.text}</Typography>
+            </div>
+          ))
+        }
+        {
+          country !== '' ? (
+            <span>
+              <Typography style={{ marginTop: '3rem', marginBottom: '1.5rem', fontSize: '2rem' }}>{country}</Typography>
+              {
+                (
+                  data.length === 0 && country !== '') &&
+                  (<>
+                    <Typography style={{ marginTop: '2rem' }} variant='body2'>{
+                      dummy.filter(fil => fil.country === country)[0]['desc']
+                    }</Typography>
+                    <Typography className={classes.textHeader} variant='body1'><InfoIcon style={{ color: '#F26419', fontSize: '2rem', marginRight: '.5rem' }} />{textMarkup}</Typography>
+                  </>
+                )
+              }
+            </span>
+            )
+          : (
+            (data.length === 0 || data.length > 1) &&
+            <Typography className={classes.textHeader} variant='body1'><InfoIcon style={{ color: '#F26419', fontSize: '2rem', marginRight: '.5rem' }} />{textMarkup}</Typography>
+          )
+        }
       	<div>
-					<AllData country={props.content} />      		
+					<AllData data={data} country={country} />
       	</div>
       </Grid>
-      { props.content !== '' && <Legend /> }
+      { data.length !== 0 ? <Legend /> : ((country !== '' && data.length !== 0) && <Legend />) }
 		</div>
 	);
 }
