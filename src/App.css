@@ -72,6 +72,7 @@ svg.rsm-svg:focus {
 /* Select menu Popover Edit */
 #menu- .MuiMenu-paper {
   min-width: 450px;
+  max-height: 500px!important;
 /*  margin-top: 4.5rem!important;
   transform-origin: 0px 39px!important;*/
 }
