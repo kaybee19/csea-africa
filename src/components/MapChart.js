@@ -52,7 +52,7 @@ const MapChart = (props) => {
   return (
     <>
       <ComposableMap data-tip="" projectionConfig={{
-          rotate: [(matchXS ? -47.5 : (matchSM ? -20 : (matchMD ? -30.5 : -22.5))), -1, 0],
+          rotate: [(matchXS ? -43.5 : (matchSM ? -20 : (matchMD ? -30.5 : -22.5))), -1, 0],
           scale: (matchXS ? 275 : (matchSM ? 400 : (matchMD ? 275 : 315)))
         }}>
           <Geographies geography={geoUrl}>

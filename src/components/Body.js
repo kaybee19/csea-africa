@@ -12,6 +12,9 @@ import { makeStyles, createStyles, useTheme } from '@material-ui/core/styles';
 import MapChart from "./MapChart";
 import MapBack from "./MapBack";
 import DataPoints from "./DataPoints";
+import Glossary from './Glossary';
+import Table from './Table';
+import SelectType from './SelectType';
 import { dummy } from '../util/data';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -22,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		padding: '0 3.25rem',
 		overflow: 'hidden',
 		[theme.breakpoints.down('sm')]: {
-			padding: '0 1rem',
+			padding: '0 0rem',
 		}
 	},
 	gridCont: {
@@ -47,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		[theme.breakpoints.down('sm')]: {
 			marginTop: '7.5rem',
 		}
-	}
+	},
 }));
 
 export default function Navbar(props) {
@@ -58,7 +61,12 @@ export default function Navbar(props) {
   const matchSM = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [content, setContent] = useState('');
-  const [country, setCountry] = useState('')
+  const [country, setCountry] = useState('');
+  const [type, setType] = useState('DPI');
+
+  const handleType = (t) => {
+  	setType(t)
+  }
 
   const handleUpdate = (d) => {
   	// setContent(d);
@@ -69,6 +77,10 @@ export default function Navbar(props) {
   	arr.length !== 0 && [...arr].forEach(d => d.classList.remove('map-class'));
 
     id !== '' && arr[id-1].classList.add('map-class');
+  }
+
+  const getType = (t) => {
+  	setType(t)
   }
 
 	React.useEffect(() => {
@@ -89,6 +101,15 @@ export default function Navbar(props) {
 		      {!matchSM && <ReactTooltip>{content}</ReactTooltip>}
 		      <MapChart setTooltipContent={setContent} />
 		      <MapBack />
+				</Grid>
+			</Grid>
+			<Grid justify='space-between' container style={{ padding: '4rem 0' }}>
+				<Grid item xs={12} md={3}>
+					<Glossary />
+				</Grid>
+				<Grid className='padFix' item xs={12} md={8}>
+					<SelectType getType={getType} />
+					<Table type={type} />
 				</Grid>
 			</Grid>
 		</Container>

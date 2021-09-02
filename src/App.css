@@ -124,7 +124,7 @@ svg.rsm-svg:focus {
 
 
 
-/* Linear progress edit */
+/* Circle progress bar */
 
 .editClass > .MuiLinearProgress-colorPrimary {
   background-color: rgb(182, 188, 226)!important;
@@ -202,6 +202,31 @@ svg.rsm-svg:focus {
 }
 
 
+
+
+/* Table linear bar */
+
+td .MuiLinearProgress-root {
+  background-color: #E0E6EB!important;
+  height: 8px;
+  border-radius: 124px;
+}
+
+td > div > .MuiLinearProgress-root > .MuiLinearProgress-bar {
+  background-color: #E0E6EB!important;
+}
+
+.low .MuiLinearProgress-bar {
+  background-color: #ff9800!important;
+}
+.mid .MuiLinearProgress-bar {
+  background-color: #009ab2!important;
+}
+.high .MuiLinearProgress-bar {
+  background-color: #35BA83!important;
+}
+
+
 /* Select edit */
 
 .MuiSelect-select:focus, .MuiSelect-select:hover {
@@ -243,4 +268,32 @@ svg.rsm-svg:focus {
   border: 2px #337ab7 solid!important;
   border-radius: 3px!important;
   font-size: 1.25rem!important;
+}
+
+
+
+/* Table edits --*/
+
+th .MuiTypography-caption, td .MuiTypography-caption {
+  text-transform: capitalize;
+}
+
+thead th .MuiTypography-caption, tbody tr .MuiTypography-caption {
+  text-transform: uppercase;
+}
+
+tbody tr .MuiTypography-caption {
+  padding: 0!important;
+}
+
+thead th > span, tbody td > span  {
+  font-size: 11px!important;
+  font-weight: 600!important;
+  color: #627C93;
+}
+
+@media (min-width: 600px) and (max-width: 960px) {
+  .padFix {
+    padding: 0 3rem!important;
+  }
 }
