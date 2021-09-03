@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 		position: 'relative'
 	},
 	pillClass: {
-		width: '10%',
+		width: '6.6%',
 	},
 	pillBottom: {
 		position: 'absolute',
@@ -164,11 +164,11 @@ export default function Tables(props) {
 	              <TableCell className={classes.smClass}>
 	              	<div className={classes.pillCont}>
 		              	{
-		              		Array(10).fill(<LinearProgress variant="determinate" value='0' className={classes.pillClass} />)
+		              		Array(15).fill(<LinearProgress variant="determinate" value='0' className={classes.pillClass} />)
 		              	}
 		              	<span className={classes.pillBottom}>
 		              		{
-		              			Array((Math.round(d.[props.type]['value']*120/10))).fill(
+		              			Array((Math.round(d.[props.type]['value']*120/6.6))).fill(
 		              				<LinearProgress
 		              					variant="determinate"
 		              					className={`${classes.pillClass} ${d.[props.type]['value'] <= 0.35 ? 'low' : (d.[props.type]['value'] <= 0.6 ? 'mid' : 'high')}`}

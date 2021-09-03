@@ -20,9 +20,13 @@ export default {
     }
   },
   spreadThis: {
-    linkClass: {
-      textDecoration: 'none',
-      color: 'inherit'
+    linkCLass: {
+      textDecoration: 'underline',
+      color: '#337AB7',
+      cursor: 'pointer',
+      '&:hover': {
+        textDecoration: 'none',
+      }
     }
   }
 }

@@ -12,7 +12,7 @@ import { makeStyles, createStyles, useTheme } from '@material-ui/core/styles';
 import MapChart from "./MapChart";
 import MapBack from "./MapBack";
 import DataPoints from "./DataPoints";
-import Glossary from './Glossary';
+import Info from './Info';
 import Table from './Table';
 import SelectType from './SelectType';
 import { dummy } from '../util/data';
@@ -105,7 +105,7 @@ export default function Navbar(props) {
 			</Grid>
 			<Grid justify='space-between' container style={{ padding: '4rem 0' }}>
 				<Grid item xs={12} md={3}>
-					<Glossary />
+					<Info />
 				</Grid>
 				<Grid className='padFix' item xs={12} md={8}>
 					<SelectType getType={getType} />
